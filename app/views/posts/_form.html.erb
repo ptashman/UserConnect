@@ -1,17 +1,73 @@
-<%= form_for(@post) do |f| %>
-  <% if @post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+<%= form_for @post, :html => { :class => "form-horizontal post" } do |f| %>
 
-      <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @post.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :user_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:user_id]) %>
   </div>
+  <div class="control-group">
+    <%= f.label :wants_item, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :wants_item, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:wants_item]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :wants_description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :wants_description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:wants_description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :wants_image, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :wants_image, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:wants_image]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :has_item, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :has_item, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:has_item]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :has_description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :has_description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:has_description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :has_image, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :has_image, :class => 'form-control' %>
+    </div>
+    <%= error_span(@post[:has_image]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            posts_path, :class => 'btn btn-default' %>
+
 <% end %>
