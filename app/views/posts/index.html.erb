@@ -29,6 +29,7 @@
         <td><%= post.has_description %></td>
         <td><%= post.has_image %></td>
         <td><%=l post.created_at %></td>
+        <% if current_user == post.user %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_post_path(post), :class => 'btn btn-default btn-xs' %>
@@ -38,11 +39,10 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-xs btn-danger' %>
         </td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_post_path,
-            :class => 'btn btn-primary' %>
+<%= render :partial => 'new' %>
