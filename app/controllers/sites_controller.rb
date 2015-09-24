@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site_by_subdomain, only: :welcome
 
   # GET /sites
   # GET /sites.json
@@ -10,6 +11,9 @@ class SitesController < ApplicationController
   # GET /sites/1
   # GET /sites/1.json
   def show
+  end
+
+  def welcome
   end
 
   # GET /sites/new

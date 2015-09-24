@@ -1,3 +1,4 @@
+require 'subdomain'
 Rails.application.routes.draw do
   devise_for :owners
   resources :owners

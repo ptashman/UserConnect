@@ -16,10 +16,18 @@
   </head>
   <body>
     <div class="container">
-      <%= render 'layouts/header' %>
+      <% if site? %>
+        <%= render 'layouts/site_header' %>
+      <% else %>
+        <%= render 'layouts/header' %>
+      <% end %>
       <%= render 'layouts/messages' %>
       <%= yield %>
-      <%= render 'layouts/footer' %>
+      <% if site? %>
+        <%= render 'layouts/site_footer' %>
+      <% else %>
+        <%= render 'layouts/footer' %>
+      <% end %>
     </div>
   </body>
 </html>

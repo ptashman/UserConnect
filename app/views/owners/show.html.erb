@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_owner_path(@owner) %> |
-<%= link_to 'Back', owners_path %>
+<%= link_to 'Edit', edit_owner_registration_path(@owner) %>
+
+Sites
+<% @owner.sites.each do |site| %>
+  <p><%= link_to site.name, site_welcome_path(site) %></p>
+  <p><%= link_to 'Edit', edit_site_path(site) %></p>
+<% end %>

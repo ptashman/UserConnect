@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150923224702) do
+ActiveRecord::Schema.define(version: 20150924050136) do
 
   create_table "owners", force: :cascade do |t|
     t.datetime "created_at",                          null: false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150923224702) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "name"
   end
 
   add_index "owners", ["email"], name: "index_owners_on_email", unique: true
@@ -41,16 +42,21 @@ ActiveRecord::Schema.define(version: 20150923224702) do
     t.string   "has_item"
     t.string   "has_description"
     t.string   "has_image"
+    t.integer  "site_id"
   end
 
   create_table "sites", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "subdomain"
+    t.integer  "owner_id"
+    t.string   "name"
   end
 
   create_table "trade_items", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "site_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -69,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150923224702) do
     t.string   "name"
     t.text     "intro"
     t.string   "image"
+    t.integer  "site_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -6,19 +6,18 @@
       </a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Home", root_path %></li>
+            <li><%= link_to "Home", root_path %></li>
           <% if signed_in? %>
-          <li><%= link_to "Feed", posts_path %></li>
-          <li><%= link_to "Profile", current_user %></li>
+            <li><%= link_to "Profile", current_owner %></li>
+            <li><%= link_to "Settings", edit_owner_registration_path(current_owner) %></li>
           <% end %>
-          <li><%= link_to "Users", users_path %></li>
         </ul>
         <ul class="nav pull-right">
           <% if signed_in? %>
-          <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
+          <li><%= link_to 'Sign out', destroy_owner_session_path, :method=>'delete' %></li>
           <% else %>
-          <li><%= link_to "Sign in", new_user_session_path %></li>
-          <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <li><%= link_to "Sign in", new_owner_session_path %></li>
+          <li><%= link_to "Sign up", new_owner_registration_path %></li>
           <% end %>
         </ul>
       </div>

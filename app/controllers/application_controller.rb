@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def update_sanitized_params
     devise_parameter_sanitizer.for(:sign_up) {|u| u.permit(:email, :name, :intro, :image, :password, :password_confirmation)}
   end
+
+  def set_site_by_subdomain
+    @site = Site.where(subdomain: request.try(:subdomain)).first
+  end
 end

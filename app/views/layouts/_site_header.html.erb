@@ -1,0 +1,32 @@
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <br>
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+      </a>
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li><%= link_to "Home", root_path(subdomain: @site.subdomain, site_id: @site.id) %></li>
+          <% if signed_in? %>
+          <li><%= link_to "Feed", posts_path(site_id: @site.id) %></li>
+          <li><%= link_to "Users", users_path(site_id: @site.id) %></li>
+          <% end %>
+        </ul>
+        <ul class="nav pull-right">
+          <% if signed_in? %>
+            <li><%= link_to "Profile", user_path(site_id: @site.id, id: current_user.id) %></li>
+            <li><%= link_to "Settings", edit_user_registration_path(site_id: @site.id, id: current_user.id) %></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to "Sign out", destroy_user_session_path(site_id: @site.id), method: "delete" %>
+            </li>
+          <% else %>
+            <li><%= link_to "Sign in", new_user_session_path %></li>
+            <li><%= link_to "Sign up", new_user_registration_path %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="navbar-spacer"></div>
+  <br><p><br>
