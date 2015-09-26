@@ -1,4 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<%= link_to 'Edit', edit_site_path(@site) %> |
-<%= link_to 'Back', sites_path %>
+    <h4>Name:</h4><%= @site.name %>
+    <p><br></p>
+    <h4>Trade Items: </h4>
+    <% @site.trade_items.each do |item| %>
+      <%= item.name %>
+    <% end %>
+    <p><br></p>
+    <%= link_to "Visit Your Site", root_path(subdomain: @site.subdomain) %>

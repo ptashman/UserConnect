@@ -1,6 +1,5 @@
 class Site < ActiveRecord::Base
   has_many :posts
-  has_many :users
   has_many :trade_items
   belongs_to :owner
 

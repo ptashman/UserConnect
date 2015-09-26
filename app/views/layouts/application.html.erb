@@ -23,11 +23,6 @@
       <% end %>
       <%= render 'layouts/messages' %>
       <%= yield %>
-      <% if site? %>
-        <%= render 'layouts/site_footer' %>
-      <% else %>
-        <%= render 'layouts/footer' %>
-      <% end %>
     </div>
   </body>
 </html>

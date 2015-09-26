@@ -24,12 +24,10 @@
         <td><%= post.user_id %></td>
         <td><%= post.wants_item %></td>
         <td><%= post.wants_description %></td>
-        <td><%= post.wants_image %></td>
         <td><%= post.has_item %></td>
         <td><%= post.has_description %></td>
-        <td><%= post.has_image %></td>
         <td><%=l post.created_at %></td>
-        <% if current_user == post.user %>
+        <% if @user == post.user %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_post_path(post), :class => 'btn btn-default btn-xs' %>

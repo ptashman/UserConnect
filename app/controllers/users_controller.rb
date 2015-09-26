@@ -26,15 +26,11 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(user_params)
-
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+      if @user = User.find_or_create_by(email: user_params[:email])
+        format.html { redirect_to posts_path(user_id: @user.id), notice: 'Select the items you would like to trade.' }
       else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.html { redirect_to :back }
       end
     end
   end

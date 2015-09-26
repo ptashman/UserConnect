@@ -1,13 +1,12 @@
 require 'subdomain'
 Rails.application.routes.draw do
   devise_for :owners
-  resources :owners
+  resources :owners, only: [:index, :show]
   resources :sites
   constraints(Subdomain) do
     get '/' => 'sites#welcome'
-    devise_for :users
     resources :posts
-    resources :users
+    resources :users, only: [:new, :create]
   end
   root 'pages#home'
 end

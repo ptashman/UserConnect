@@ -1,6 +1,4 @@
 class SitesController < ApplicationController
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
-  before_action :set_site_by_subdomain, only: :welcome
 
   # GET /sites
   # GET /sites.json
@@ -14,6 +12,7 @@ class SitesController < ApplicationController
   end
 
   def welcome
+    @user = User.new
   end
 
   # GET /sites/new
@@ -66,11 +65,6 @@ class SitesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_site
-      @site = Site.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
       params[:site]

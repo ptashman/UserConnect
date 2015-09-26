@@ -1,9 +1,6 @@
 class User < ActiveRecord::Base
+  belongs_to :site
   has_many :posts
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
 
   def feed
     Post.feed_items(self)

@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:edit, :update, :destroy]
   before_action :prevent_unauthorized_access, only: [:edit, :update, :destroy]
-  before_action :authenticate_user!
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.feed_items(current_user)
+    @user = User.find(params[:user_id])
+    @posts = Post.feed_items(@user)
     @post = Post.new
   end
 
@@ -18,7 +18,6 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
     respond_to do |format|
       if @post.save
         format.html { redirect_to :back, notice: 'Post was successfully created.' }
@@ -33,9 +32,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to :back, notice: 'Post was successfully updated.' }
+        format.html { render :index, notice: 'Post was successfully updated.' }
       else
-        format.html { redirect_to :back }
+        format.html { render :index }
       end
     end
   end
@@ -58,7 +57,7 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:has_item, :has_description, :has_image, :wants_item, :wants_description, :wants_image)
+      params.require(:post).permit(:has_item, :has_description, :has_image, :wants_item, :wants_description, :wants_image, :user_id)
     end
 
     def prevent_unauthorized_access
