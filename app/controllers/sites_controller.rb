@@ -1,4 +1,5 @@
 class SitesController < ApplicationController
+  before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
   # GET /sites.json
@@ -27,15 +28,15 @@ class SitesController < ApplicationController
   # POST /sites
   # POST /sites.json
   def create
-    @site = Site.new(site_params)
-
+    @site = Site.new(site_params.reject {|k,v|k=="trade_items"})
     respond_to do |format|
       if @site.save
+        site_params[:trade_items].split(",").each do |item|
+          TradeItem.create(site_id: @site.id, name: item)
+        end
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
-        format.json { render :show, status: :created, location: @site }
       else
-        format.html { render :new }
-        format.json { render json: @site.errors, status: :unprocessable_entity }
+        format.html { render action: 'new' }
       end
     end
   end
@@ -65,8 +66,13 @@ class SitesController < ApplicationController
   end
 
   private
+
+    def set_site
+      @site = Site.find(params[:id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params[:site]
+      params.require(:site).permit(:name, :owner_id, :trade_items)
     end
 end

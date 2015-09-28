@@ -36,6 +36,14 @@
       var trade_items = document.getElementById("site_trade_items").value;
       if (trade_items == "") { trade_items = item; } else { trade_items = trade_items + "," + item; }
     }
+    if(typeof trade_items === 'undefined') { trade_items = "" };
     document.getElementById("site_trade_items").value = trade_items;
   }
+  $(document).ready(function() {
+    load_items("trade_item1");
+    for(var i=1;i<11;i++){
+      document.getElementById("trade_item" + (i).toString()).value = "";
+    }
+  });
+  window.onbeforeunload = function () {};
 </script>
