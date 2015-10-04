@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:edit, :update, :destroy]
-  before_action :prevent_unauthorized_access, only: [:edit, :update, :destroy]
+  before_action :set_post_and_user, only: [:edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
@@ -32,9 +31,9 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { render :index, notice: 'Post was successfully updated.' }
+        format.html { redirect_to posts_path(user_id: @user.id), notice: 'Post was successfully updated.' }
       else
-        format.html { render :index }
+        format.html { redirect_to posts_path(user_id: @user.id) }
       end
     end
   end
@@ -42,25 +41,21 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    redirect_to root_path unless current_user == @post.user
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_path(user_id: @user.id), notice: 'Post was successfully destroyed.' }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_post
+    def set_post_and_user
       @post = Post.find(params[:id])
+      @user = @post.user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:has_item, :has_description, :has_image, :wants_item, :wants_description, :wants_image, :user_id)
-    end
-
-    def prevent_unauthorized_access
-      redirect_to root_path unless current_user == @post.user
     end
 end

@@ -7,3 +7,5 @@ Sites
   <p><%= link_to site.name, root_url(subdomain: site.subdomain) %></p>
   <p><%= link_to 'Edit', edit_site_path(site) %></p>
 <% end %>
+
+<%= link_to "Create a new site", new_site_path %>

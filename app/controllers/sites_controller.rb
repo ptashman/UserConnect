@@ -1,4 +1,6 @@
 class SitesController < ApplicationController
+  include SitesHelper
+  
   before_action :set_site, only: [:show, :edit, :update, :destroy]
 
   # GET /sites
@@ -31,9 +33,7 @@ class SitesController < ApplicationController
     @site = Site.new(site_params.reject {|k,v|k=="trade_items"})
     respond_to do |format|
       if @site.save
-        site_params[:trade_items].split(",").each do |item|
-          TradeItem.create(site_id: @site.id, name: item)
-        end
+        create_trade_items(@site, site_params[:trade_items])
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
       else
         format.html { render action: 'new' }
@@ -73,6 +73,6 @@ class SitesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def site_params
-      params.require(:site).permit(:name, :owner_id, :trade_items)
+      params.require(:site).permit(:name, :subdomain, :owner_id, :trade_items)
     end
 end

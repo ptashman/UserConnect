@@ -8,13 +8,19 @@ class Post < ActiveRecord::Base
   #mount_uploader :has_image, MicropostImageUploader
 
   def self.feed_items(user)
-    array = from_users_matched_with(user) + user.posts
-    where(id: array.map(&:id))
+    items = (matched_with(user) + posted_by(user)).uniq
+    where(id: items.map(&:id))
   end
 
-  def self.from_users_matched_with(user)
-    has_items = user.posts.map(&:has_item)
-    wants_items = user.posts.map(&:wants_item)
-    (user.posts.where("wants_item IN (?)", has_items) + user.posts.where("has_item IN (?)", wants_items)).uniq
+private
+
+  def self.matched_with(user)
+    has_items = posted_by(user).map(&:has_item)
+    wants_items = posted_by(user).map(&:wants_item)
+    (where("wants_item IN (?)", has_items) + where("has_item IN (?)", wants_items))
+  end
+
+  def self.posted_by(user)
+    where(user_id: user.id)
   end
 end

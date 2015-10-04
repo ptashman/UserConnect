@@ -3,7 +3,9 @@ class Site < ActiveRecord::Base
   has_many :trade_items
   belongs_to :owner
 
-  validates :name, uniqueness: { scope: :owner_id }
+  validates :name, presence: true, uniqueness: { scope: :owner_id }
+  validates :subdomain, presence: true, uniqueness: true
+  validates_format_of :subdomain, :with => /[a-zA-Z0-9][a-zA-Z0-9\-\.]+[a-zA-Z0-9]/i
 
   def trade_list
     names = trade_items.map { |item| [item.name, item.name] }
