@@ -6,7 +6,11 @@
       </a>
       <div class="nav-collapse">
         <ul class="nav">
-          <li><%= link_to "Home", root_path(subdomain: @site.subdomain) %></li>
+          <% if @site %>
+            <li><%= link_to "Home", root_path(subdomain: @site.subdomain) %></li>
+          <% else %>
+            <li><%= link_to "Home", root_path %></li>
+          <% end %>
         </ul>
       </div>
     </div>
