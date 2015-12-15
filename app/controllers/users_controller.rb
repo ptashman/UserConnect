@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     respond_to do |format|
-      if @user = User.find_or_create_by(email: user_params[:email])
+      if @user = User.find_or_create_by(email: user_params[:email], site_id: user_params[:site_id])
         format.html { redirect_to posts_path(user_id: @user.id), notice: 'Select the items you would like to trade.' }
       else
         format.html { redirect_to :back }
@@ -67,6 +67,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :intro, :image)
+      params.require(:user).permit(:name, :email, :intro, :image, :site_id)
     end
 end

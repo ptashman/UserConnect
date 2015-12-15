@@ -21,7 +21,7 @@ class PostsController < ApplicationController
       if @post.save
         format.html { redirect_to :back, notice: 'Post was successfully created.' }
       else
-        format.html { redirect_to :back }
+        format.html { redirect_to :back, notice: @post.errors.full_messages }
       end
     end
   end
@@ -56,6 +56,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:has_item, :has_description, :has_image, :wants_item, :wants_description, :wants_image, :user_id)
+      params.require(:post).permit(:has_item, :has_description, :has_image, :wants_item, :wants_description, :wants_image, :user_id, :site_id)
     end
 end

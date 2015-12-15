@@ -5,28 +5,24 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:wants_item) %></th>
       <th><%= model_class.human_attribute_name(:wants_description) %></th>
-      <th><%= model_class.human_attribute_name(:wants_image) %></th>
+      <!--<th><%= model_class.human_attribute_name(:wants_image) %></th>-->
       <th><%= model_class.human_attribute_name(:has_item) %></th>
       <th><%= model_class.human_attribute_name(:has_description) %></th>
-      <th><%= model_class.human_attribute_name(:has_image) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <!--<th><%= model_class.human_attribute_name(:has_image) %></th>-->
+      <!--<th><%= model_class.human_attribute_name(:created_at) %></th>-->
     </tr>
   </thead>
   <tbody>
     <% @posts.each do |post| %>
       <tr>
-        <td><%= link_to post.id, post_path(post) %></td>
-        <td><%= post.user_id %></td>
+        <td><%= @user == post.user ? "You" : post.user.email %></td>
         <td><%= post.wants_item %></td>
         <td><%= post.wants_description %></td>
         <td><%= post.has_item %></td>
         <td><%= post.has_description %></td>
-        <td><%=l post.created_at %></td>
         <% if @user == post.user %>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
