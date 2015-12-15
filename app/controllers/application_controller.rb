@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
   
   def set_site_by_subdomain
-    @site = Site.where(subdomain: request.try(:subdomain)).first
+    @site = Site.find_by_subdomain(request.try(:subdomain))
   end
 end
