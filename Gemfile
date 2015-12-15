@@ -9,19 +9,18 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
-gem 'mailcatcher'
 gem 'twitter-bootstrap-rails'
+
+group :development, :test do
+  gem 'mailcatcher'
+  gem 'byebug'
+  gem 'web-console', '~> 2.0'
+  gem 'spring'
+end
 
 group :production do
   gem 'rails_12factor'
   gem 'pg'
 end  
-
-group :development, :test do
-  #gem 'sqlite3'
-  gem 'byebug'
-  gem 'web-console', '~> 2.0'
-  gem 'spring'
-end
 
 ruby "2.1.2"
