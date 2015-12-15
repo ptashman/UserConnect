@@ -36,7 +36,7 @@
 body {
   font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #f5f5f5;
-  #background-image: image-url(../img/bg_texture.png);
+  background-image: image-url(../img/bg_texture.png);
 }
 a {
   color: #285c73;
