@@ -1,7 +1,9 @@
 <h1>Welcome to my site</h1>
 <h2>Enter your email address:</h2>
 <%= form_for @user, action: 'create#user' do |f| %>
-<%= f.hidden_field :site_id, :value => @site.id %>
+<% if @site %>
+  <%= f.hidden_field :site_id, :value => @site.id %>
+<% end %>
 <%= f.email_field :email %>
 <%= f.submit "Submit" %>
 <% end %>
