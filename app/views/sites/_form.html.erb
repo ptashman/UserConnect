@@ -38,8 +38,9 @@
       var trade_items = document.getElementById("site_trade_items").value;
       if (trade_items == "") { trade_items = item; } else { trade_items = trade_items + "," + item; }
     }
-    if(typeof trade_items === 'undefined') { trade_items = "" };
-    document.getElementById("site_trade_items").value = trade_items;
+    if (typeof trade_items !== 'undefined') {
+      document.getElementById("site_trade_items").value = trade_items;
+    }
   }
   $(document).ready(function() {
     load_items("trade_item1");
