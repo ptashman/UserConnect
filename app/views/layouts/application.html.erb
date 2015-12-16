@@ -14,18 +14,16 @@
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body style="background-color: #f5f5f5;">
     <div class="container">
       <% if site? %>
         <%= render 'layouts/site_header' %>
       <% else %>
         <%= render 'layouts/header' %>
       <% end %>
-      <div style="background-color: #f5f5f5;">
-        </br></br>
-        <%= render 'layouts/messages' %>
-        <%= yield %>
-      </div>
+      </br></br>
+      <%= render 'layouts/messages' %>
+      <%= yield %>
     </div>
   </body>
 </html>
