@@ -21,28 +21,28 @@
     <div class="controls">
       <%= f.select :wants_item, @site.trade_list, :class => 'form-control' %>
     </div>
-    <%= error_span(@post[:wants_item]) %>
+    <%#= error_span(@post[:wants_item]) %>
   </div>
   <div class="control-group">
     <%= f.label :wants_description, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :wants_description, :class => 'form-control' %>
     </div>
-    <%= error_span(@post[:wants_description]) %>
+    <%#= error_span(@post[:wants_description]) %>
   </div>
   <div class="control-group">
     <%= f.label :has_item, :class => 'control-label' %>
     <div class="controls">
       <%= f.select :has_item, @site.trade_list, :class => 'form-control' %>
     </div>
-    <%= error_span(@post[:has_item]) %>
+    <%#= error_span(@post[:has_item]) %>
   </div>
   <div class="control-group">
     <%= f.label :has_description, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :has_description, :class => 'form-control' %>
     </div>
-    <%= error_span(@post[:has_description]) %>
+    <%#= error_span(@post[:has_description]) %>
   </div>
 
 
