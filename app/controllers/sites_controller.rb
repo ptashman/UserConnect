@@ -46,7 +46,9 @@ class SitesController < ApplicationController
   # PATCH/PUT /sites/1.json
   def update
     respond_to do |format|
-      if @site.update(site_params)
+      if @site.update(site_params.reject {|k,v|k=="trade_items"})
+        TradeItem.where(site_id: @site.id).destroy_all
+        create_trade_items(@site, site_params[:trade_items])
         format.html { redirect_to @site, notice: 'Site was successfully updated.' }
         format.json { render :show, status: :ok, location: @site }
       else
