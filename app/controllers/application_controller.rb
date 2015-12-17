@@ -12,5 +12,6 @@ class ApplicationController < ActionController::Base
   
   def set_site_by_subdomain
     @site = Site.where(subdomain: request.try(:subdomain)).first
+    redirect_to root_url(subdomain: nil) unless @site
   end
 end
