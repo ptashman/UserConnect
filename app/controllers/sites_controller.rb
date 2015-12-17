@@ -15,6 +15,7 @@ class SitesController < ApplicationController
   end
 
   def welcome
+    redirect_to root_url(subdomain: nil) unless @site
     @user = User.new
   end
 
